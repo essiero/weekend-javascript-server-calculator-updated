@@ -31,6 +31,7 @@ let equation;
 function makeCalculateObject(){
     let numOne = document.getElementById('numOne').valueAsNumber;
     let numTwo = document.getElementById('numTwo').valueAsNumber;
+    // thank you Hannah for showing me .valueAsNumber!!!
     equation = {
         numOne: numOne,
         numTwo: numTwo,
@@ -49,21 +50,21 @@ axios({
     .then((response) => {
           console.log('Confirmed server received form submission.')
           // call info retrieval
-          getCalculations()
+          getResult()
     })
 }
 
-function getCalculations() {
+function getResult() {
     axios ({
         method: 'GET',
         url: '/calculations'
     })
     .then(function(response) {
         console.log('GET response received from server! Response: ', response);
-        let calculationsArray = response.data;
-        console.log('Parsing data from response package. Items: ', calculationsArray);
+        let recentResult = response.data;
+        console.log('Parsing data from response package. Result: ', recentResult);
         // formats and edits html with calculations
-        renderDisplay(calculationsArray);
+        renderResult(recentResult);
         // for errors
     }).catch(function(error){
         console.log(error);
@@ -71,9 +72,9 @@ function getCalculations() {
     })
 }
 
-function renderDisplay(calculationsArray){
-    console.log('hello from the render function!', calculationsArray);
-
+function renderResult(object){
+    console.log('hello from the render function! Here is our recent results object: ', object);
+    document.getElementById('recent-result').textContent = object;
 }
 
 

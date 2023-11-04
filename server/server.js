@@ -10,18 +10,19 @@ app.use(express.static('server/public'));
 let calculations = [];
 let recentResult;
 
-function calculateEquation(array){
-  for(let object of array){
+function calculateResult(object){
     if(object.operator === '+'){
-recentResult = `object.numOne + object.numTwo = ${object.numOne + object.numTwo}`
+recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne + object.numTwo}`
     } else if (object.operator === '-'){
-      recentResult = `object.numOne + object.numTwo = ${object.numOne - object.numTwo}`
+      recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne - object.numTwo}`
     } else if  (object.operator === '*'){
-      recentResult = `object.numOne + object.numTwo = ${object.numOne * object.numTwo}`
+      recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne * object.numTwo}`
   } else if (object.operator === '/'){
-    recentResult = `object.numOne + object.numTwo = ${object.numOne / object.numTwo}`
-}}
+    recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne / object.numTwo}`
+}
 console.log('Recent result: ', recentResult);
+calculations.push(recentResult);
+
   }
 
 
@@ -34,16 +35,15 @@ app.post('/calculations', (req, res) => {
   console.log('POST /calculations received a request!');
   console.log('req.body: ', req.body);
   let newEquationObject = req.body;
-  calculations.push(newEquationObject);
-  calculateEquation(calculations);
+  calculateResult(newEquationObject);
   console.log('Recent result: ', recentResult);
   res.sendStatus(201)
 })
 
 app.get('/calculations', (req, res) => {
   console.log('GET request received by client. Sending response...');
-  console.log('Sending calculation array to client. Array: ', calculations);
-  res.send(calculations)
+  console.log('Sending most recent calculation to client: ', recentResult);
+  res.send(recentResult)
 })
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
