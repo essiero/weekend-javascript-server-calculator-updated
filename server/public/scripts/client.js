@@ -29,12 +29,15 @@ function divide(){
 function makeCalculateObject(){
     let numOne = document.getElementById('numOne').value;
     let numTwo = document.getElementById('numTwo').value;
-    // I don't think this 👇 is going to work since i have multiple buttons
+    // if(operator === '+'){
+
+    // }
     let equation = `{
         numOne: ${numOne},
-        numTwo: ${numTwo}
+        numTwo: ${numTwo},
+        operator: ${operator}
     }`
-    console.log('Numbers: ', equation)
+    console.log('Numbers object: ', equation)
 }
 
 
