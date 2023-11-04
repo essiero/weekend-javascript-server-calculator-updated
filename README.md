@@ -23,7 +23,7 @@
 - onReady() function to check that client.js is loading correctly
 - makeCalculationObject() function to take data from input fields and operator and make an object out of them
 - handleSubmit(event) function to preventDefault page refresh
-- 
+- renderDisplay()
 
 ## To-do's: server.js
 - establish server
@@ -42,8 +42,9 @@
     - teach server to read json
         - app.use(express.json());
 - create empty array where calculate history results will be stored
-- computeEquation() function (maybe with numOne and numTwo parameters?) that:
+- calculateEquation() function (maybe with numOne and numTwo parameters?) that:
     - takes in calculationObject from client
+    - 
     - calculates equation
     - returns result of equation
     - makes a new object that tacks on a results property
