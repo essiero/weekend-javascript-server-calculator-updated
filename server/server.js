@@ -14,11 +14,11 @@ function calculateResult(object){
     if(object.operator === '+'){
 recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne + object.numTwo}`
     } else if (object.operator === '-'){
-      recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne - object.numTwo}`
+      recentResult = `${object.numOne} - ${object.numTwo} = ${object.numOne - object.numTwo}`
     } else if  (object.operator === '*'){
-      recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne * object.numTwo}`
+      recentResult = `${object.numOne} * ${object.numTwo} = ${object.numOne * object.numTwo}`
   } else if (object.operator === '/'){
-    recentResult = `${object.numOne} + ${object.numTwo} = ${object.numOne / object.numTwo}`
+    recentResult = `${object.numOne} / ${object.numTwo} = ${object.numOne / object.numTwo}`
 }
 console.log('Recent result: ', recentResult);
 calculations.push(recentResult);
@@ -29,6 +29,17 @@ calculations.push(recentResult);
 // Here's a wonderful place to make some routes:
 
 // GET /calculations
+app.get('/calculations', (req, res) => {
+  console.log('GET request received by client. Sending response...');
+  console.log('Sending most recent calculation to client: ', recentResult);
+  res.send(recentResult)
+})
+
+app.get('/calculationsHistory', (req, res) => {
+  console.log('GET request received by client. Sending response...');
+  console.log('Sending most calculation history to client: ', calculations);
+  res.send(calculations)
+})
 
 // POST /calculations
 app.post('/calculations', (req, res) => {
@@ -40,11 +51,6 @@ app.post('/calculations', (req, res) => {
   res.sendStatus(201)
 })
 
-app.get('/calculations', (req, res) => {
-  console.log('GET request received by client. Sending response...');
-  console.log('Sending most recent calculation to client: ', recentResult);
-  res.send(recentResult)
-})
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸

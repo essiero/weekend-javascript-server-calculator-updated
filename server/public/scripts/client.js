@@ -63,8 +63,8 @@ function getResult() {
         console.log('GET response received from server! Response: ', response);
         let recentResult = response.data;
         console.log('Parsing data from response package. Result: ', recentResult);
-        // formats and edits html with calculations
-        renderResult(recentResult);
+        // formats and edits html with calculation result
+        renderResults(recentResult);
         // for errors
     }).catch(function(error){
         console.log(error);
@@ -72,11 +72,30 @@ function getResult() {
     })
 }
 
-function renderResult(object){
+function renderResults(object){
     console.log('hello from the render function! Here is our recent results object: ', object);
     document.getElementById('recent-result').textContent = object;
+    axios({
+        method: 'GET',
+        url: '/calculationsHistory'
+    })
+    .then(function(response){
+        let resultHistory = response.data;
+        document.getElementById('result-history').innerHTML = ''
+        // 💥💥💥 add loop to loop through resultHistory array and create <li>
+        // for each object in the array 💥💥💥
+        for (object of resultHistory){
+        document.getElementById('result-history').innerHTML += `
+        <li>${object}</li>`
+        }
+        
+    })
 }
 
+// function renderResultsHistory(object){
+//     console.log('Hello from the render results history! Here is our results history: ', object)
+
+// }
 
 function onReady(){
 if(verbose)console.log('hello from client.js!!');
