@@ -20,7 +20,7 @@
       <button onclick="handleSubmit(event); divide()" class="operator" value="/">/</button>
       <input id="numTwo" type="number" placeholder="Second Number" required>
       <button id="equals" onclick="handleSubmit(event); makeCalculateObject()">=</button>
-      <button id="clear" onclick="clearInputs()">C</button>
+      <button id="clear" onclick="handleSubmit(event); clearInputs()">C</button>
     </form>
 
     <section data-testid="recentResult">
