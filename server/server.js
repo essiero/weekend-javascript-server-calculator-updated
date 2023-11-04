@@ -8,10 +8,21 @@ app.use(express.static('server/public'));
 // Global variable that will contain all of the
 // calculation objects:
 let calculations = [];
+let recentResult;
 
-function calculateEquation(){
-
-}
+function calculateEquation(array){
+  for(let object of array){
+    if(object.operator === '+'){
+recentResult = `object.numOne + object.numTwo = ${object.numOne + object.numTwo}`
+    } else if (object.operator === '-'){
+      recentResult = `object.numOne + object.numTwo = ${object.numOne - object.numTwo}`
+    } else if  (object.operator === '*'){
+      recentResult = `object.numOne + object.numTwo = ${object.numOne * object.numTwo}`
+  } else if (object.operator === '/'){
+    recentResult = `object.numOne + object.numTwo = ${object.numOne / object.numTwo}`
+}}
+console.log('Recent result: ', recentResult);
+  }
 
 
 // Here's a wonderful place to make some routes:
@@ -20,12 +31,19 @@ function calculateEquation(){
 
 // POST /calculations
 app.post('/calculations', (req, res) => {
-  console.log('POST /calculations received a request!')
-  console.log('req.body: ', req.body)
-  let newEquationObject = req.body
+  console.log('POST /calculations received a request!');
+  console.log('req.body: ', req.body);
+  let newEquationObject = req.body;
   calculations.push(newEquationObject);
-  console.log(calculations)
+  calculateEquation(calculations);
+  console.log('Recent result: ', recentResult);
   res.sendStatus(201)
+})
+
+app.get('/calculations', (req, res) => {
+  console.log('GET request received by client. Sending response...');
+  console.log('Sending calculation array to client. Array: ', calculations);
+  res.send(calculations)
 })
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:

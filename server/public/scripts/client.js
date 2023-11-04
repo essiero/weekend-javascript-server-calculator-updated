@@ -29,13 +29,13 @@ function divide(){
 let equation; 
 
 function makeCalculateObject(){
-    let numOne = document.getElementById('numOne').value;
-    let numTwo = document.getElementById('numTwo').value;
-    equation = `{
-        numOne: ${numOne},
-        numTwo: ${numTwo},
-        operator: ${operator}
-    }`
+    let numOne = document.getElementById('numOne').valueAsNumber;
+    let numTwo = document.getElementById('numTwo').valueAsNumber;
+    equation = {
+        numOne: numOne,
+        numTwo: numTwo,
+        operator: operator
+    }
     console.log('Numbers object: ', equation)
 
 
@@ -49,7 +49,7 @@ axios({
     .then((response) => {
           console.log('Confirmed server received form submission.')
           // call info retrieval
-        //   getCalculations()
+          getCalculations()
     })
 }
 
@@ -73,7 +73,6 @@ function getCalculations() {
 
 function renderDisplay(calculationsArray){
     console.log('hello from the render function!', calculationsArray);
-    document.getElementById('resultHistory').innerHTML = '';
 
 }
 
