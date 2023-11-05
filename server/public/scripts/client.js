@@ -97,6 +97,8 @@ function onReady(){
 if(verbose)console.log('hello from client.js!!');
 }
 
+renderResults();
+
 onReady();
 
 
